@@ -1,0 +1,41 @@
+AUTOR:
+Nome: Beatriz Viana Costa
+NUSP: 13673214
+E-mail: beatrizvianacosta@usp.br
+
+
+DESCRIÇÃO:
+O programa é um jogo do Pac-man, é dado como entrada um arquivo que será o labirinto e já conterá os fantasmas, que serão representados pelo carácter 'F'. 
+Posteriormente será definida a posição do Pac-man com o carácter 'C' no centro do labirinto. O objetivo do jogo é comer todos os pacdots, representados por '.', sem que os fantasmas encostem no Pac-man.
+Para a movimentação serão utilizadas as teclas 'a', 'w', 'd' e 's', que terão seus movimentos indicados pelo prompt que aparecerá na tela.
+Caso o usuário ganhe o jogo, uma mensagem o parabenizando será impressa na tela, caso contrário será impresso 'Game over'. Nos dois casos a pontuação obtida na partida é impressa na tela.
+
+
+COMO EXECUTAR:
+Para a execução do programa é necessário rodar o Makefile no terminal.
+Caso se deseje compilar, escrever o seguinte comando:
+Makefile all
+
+Caso se deseje gerar a documentação das bibliotecas, rodar o seguinte comando:
+Makefile documentação
+
+Caso deseje rodar os testes, escrever o seguinte comando:
+Makefile tests
+
+E para caso se deseje excluir os arquivos .o, documentação e o programa, rodar o seguinte programa:
+Makefile clean
+
+TESTES:
+O teste realizado foi de verificação da quantidade de linhas, colunas e se o Pac-man é inicializado na posição certa no labirinto, em seu centro.
+
+
+DEPENDÊNCIAS:
+CPU: 12th Gen Intel(R) Core(TM) i7-1255U;
+Sistema Operacional: Ubuntu 22.04 LTS;
+g++ (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0
+GNU Make 4.3
+Doxygen versão 1.9.5 
+graphviz version 2.43.0
+googletest (1.11.0-3)
+
+

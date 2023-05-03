@@ -1,0 +1,348 @@
+AUTOR:  
+
+Nome: Beatriz Viana Costa 
+NUSP: 13673214 
+Email: beatrizvianacosta@usp.br 
+
+
+DESCRIÇÃO: 
+
+O programa realiza verificações periódicas de acordo com o intervalo fornecido pelo usuário.  
+Em cada verificação imprimi a data e a hora e chega se há IPs conectados na porta 45052, em caso afirmativo estes IPs são mostrados, caso contrário nada é impresso.  
+Após isso verifica a porcentagem de uso da CPU pelo comando top, pegando o trecho com a informação idle, caso esse valor esteja acima do valor de limite de uso da CPU dado na entrada, nada é impresso no Telegram e na saída padrão, somente no arquivo indicado. 
+Depois, caso o servidor esteja fora do ar, ou seja, não há socket de listen na porta 45052, é impresso um aviso nas três saídas de que o servidor não está on, até que o mesmo volte. 
+Ao final de cada verificação é impresso “...” nas três saídas para indicar o fim da verificação.  
+Além disso, a cada 100 intervalos é impresso também a média das medições da CPU neste período, que é obtida através da soma de cada medição em uma variável, que posteriormente é dividida por 100; e também é impresso o tempo em segundos que o servidor ficou fora de ar, que é obtido zerando a variável SECONDS antes da verificação se o servidor está fora do ar, padrão do bash que conta o tempo em segundos desde que o programa começa a ser executado.   Após a impressão destas informações, todas as variáveis utilizadas são zeradas para poderem armazenar novas informações dos próximos 100 intervalos. 
+
+
+COMO EXECUTAR: 
+
+Para executar o programa é utilizado o comando ./ep2.sh e são passados cinco parâmetros para a execução da seguinte forma: 
+./ep2.sh <PAR1> <PAR2> <PAR3> <PAR4> <PAR5> 
+Todos separados por espaços, de forma que o <PAR1> é o intervalo de tempo em segundos que o programa verificara o sistema, o <PAR2> é o caminho para um arquivo onde serão salvas todas as verificações, o <PAR3> é o limite de porcentagem de uso da CPU, o <PAR4> é o token do bot do Telegram do qual você deseja receber os avisos e o <PAR5> é o ID desse mesmo bot. 
+
+ 
+
+Saída padrão e Telegram: 
+
+Já na saída teremos a primeira e segunda linhas sendo, respectivamente, a data e hora da verificação. Se houver IPs conectados, uma lista será impressa. Ocorrera a medição de ociosidade da CPU, e caso esse valor seja menor do que o limite passado no parâmetro 3 será impresso.  Por último haverá será verificado se o servidor está fora do ar, em caso afirmativo, será impresso um aviso, que no terminal será impresso e apagado, e impresso novamente até que o servidor volte, e no telegram o aviso será mandado diversas vezes até que o servidor volte. 
+A mensagem “...” indica a divisão entre cada verificação. 
+
+ 
+Saida no arquivo indicado: 
+
+Todas as informações que serão apresentadas na saída padrão e o telegram também serão salvas no arquivo indicado pelo usuário, com a exceção de que a porcentagem de ociosidade da CPU sempre será salva, independentemente de ser menor ou não que o valor dado como limite de uso da CPU na entrada.  
+Ademais, a cada ciclo de 100 intervalos também serão salvos no arquivo a média das 100 últimas medições de ociosidade de CPU e o tempo em segundos que o servidor ficou fora do ar nesse mesmo período. Essas informações extras são delimitadas pelas mensagens “***”. 
+
+
+TESTES: 
+
+O teste será realizado com os seguintes parâmetros: 
+
+ENTRADA 1:  
+
+- Intervalo de tempo em segundos: 1 
+- Caminho para o arquivo que guardara as verificações: ~/Desktop/tecprog/info.txt 
+- Limite de porcentagem de uso da CPU: 10 
+- Token do bot: 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 
+- ID do bot: 5028546959 
+
+ENTRADA 2: 
+
+- Intervalo de tempo em segundos: 1 
+- Caminho para o arquivo que guardara as verificações: ~/Desktop/tecprog/info.txt 
+- Limite de porcentagem de uso da CPU: 100 
+- Token do bot: 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 
+- ID do bot: 5028546959 
+
+Para fim de testes, a quantidade de intervalos para que as informações adicionais sejam guardadas no arquivo será 1, pois para 100 haveria uma saída muito grande. 
+
+ 
+Saida padrão: 
+
+Servidor desligado: 
+
+ENTRADA 1:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 1:  
+
+Data: 13/10/2022 
+Hora: 00:27:21 
+O servidor está fora do ar 
+
+ENTRADA 2:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 2: 
+
+Data: 13/10/2022 
+Hora: 00:30:49 
+Ociosidade da CPU: 93.8% 
+O servidor está fora do ar 
+
+
+Servidor ligado: 
+
+ENTRADA 3:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 3: 
+
+Data: 13/10/2022 
+Hora: 00:34:12 
+Lista de IPs que estão conectados no servidor: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+... 
+
+
+ENTRADA 4:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 4: 
+
+Data: 13/10/2022 
+Hora: 00:37:35 
+Lista de IPs que estão conectados no servidor: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+Ociosidade da CPU: 95.3% 
+... 
+
+
+Telegram: 
+
+Servidor desligado: 
+
+ENTRADA 1:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 1: 
+
+> EP2 tecprog: 
+Data: 13/10/2022 
+
+
+> EP2 tecprog: 
+Hora: 00:27:21 
+
+
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+  
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+  
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+
+ENTRADA 2:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 2: 
+
+> EP2 tecprog: 
+Data: 13/10/2022 
+
+
+> EP2 tecprog: 
+Hora: 00:30:49 
+
+
+> EP2 tecprog: 
+Ociosidade da CPU: 93.8% 
+
+
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+
+> EP2 tecprog: 
+O servidor está fora do ar 
+
+
+> EP2 tecprog:
+O servidor está fora do ar 
+
+
+Servidor ligado: 
+
+ENTRADA 3:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 3: 
+
+> EP2 tecprog: 
+Data: 13/10/2022 
+
+
+> EP2 tecprog: 
+Hora: 00:34:12 
+  
+
+> EP2 tecprog: 
+Lista de IPs que estão conectados no servidor: 
+  
+
+> EP2 tecprog: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+
+  
+> EP2 tecprog: 
+... 
+
+
+ENTRADA 4:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 4: 
+
+> EP2 tecprog: 
+Data: 13/10/2022 
+
+  
+> EP2 tecprog: 
+Hora: 00:37:35 
+
+
+> EP2 tecprog: 
+Lista de IPs que estão conectados no servidor: 
+  
+
+> EP2 tecprog: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+
+
+> EP2 tecprog: 
+Ociosidade da CPU: 95.3% 
+
+
+> EP2 tecprog: 
+... 
+
+
+Arquivo: 
+
+Servidor desligado: 
+
+ENTRADA 1:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 1: 
+
+Data: 13/10/2022 
+Hora: 00:27:21 
+Ociosidade da CPU: 89.4% 
+O servidor está fora do ar 
+O servidor está fora do ar 
+O servidor está fora do ar 
+ 
+
+ENTRADA 2:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 2: 
+
+Data: 13/10/2022 
+Hora: 00:30:49 
+Ociosidade da CPU: 93.8% 
+O servidor está fora do ar 
+O servidor está fora do ar 
+O servidor está fora do ar 
+
+
+Servidor ligado: 
+
+ENTRADA 3:   
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 3: 
+
+Data: 13/10/2022 
+Hora: 00:34:12 
+Lista de IPs que estão conectados no servidor: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+Ociosidade da CPU: 91.3% 
+... 
+*** 
+Média das 100 últimas medições de ociosidade de CPU: 91.3% 
+Tempo em segundos que o servidor ficou fora do ar dentro dos últimos 100 intervalos de tempo: 0s 
+*** 
+
+
+ENTRADA 4:  
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 100 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 4:  
+
+Data: 13/10/2022 
+Hora: 00:37:35 
+Lista de IPs que estão conectados no servidor: 
+127.0.0.1:45052 
+127.0.0.1:47000 
+Ociosidade da CPU: 95.3% 
+... 
+*** 
+Média das 100 últimas medições de ociosidade de CPU: 95.3% 
+Tempo em segundos que o servidor ficou fora do ar dentro dos últimos 100 intervalos de tempo: 0s 
+*** 
+ 
+
+Servidor inicialmente desligado e posteriormente ligado (para observação do tempo que o servidor ficou fora do ar):
+
+ENTRADA 5:
+
+./ep2.sh 1 ~/Desktop/tecprog/info.txt 10 5702450154:AAH-YFmCiIphpaJLfEP5ztTdLsBUNBJDdwA 5028546959 
+
+SAÍDA 5:
+Data: 13/10/2022
+Hora: 00:45:22
+Ociosidade da CPU: 94.2%
+O servidor está fora do ar
+O servidor está fora do ar
+O servidor está fora do ar
+O servidor está fora do ar
+O servidor está fora do ar
+O servidor está fora do ar
+...                                                                 *neste ponto é retomada a conexão com o servidor
+***
+Média das 100 últimas medições de ociosidade de CPU: 94.2%
+Tempo em segundos que o servidor ficou fora do ar dentro dos últimos 100 intervalos de tempo: 17s
+***
+
+
+DEPENDÊNCIAS: 
+
+CPU: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz, 1833 MHz ,  
+Kernel: 5.4.0-91-generic x86_64 bits: 64  
+Distro: Linux Mint 20.3 Una  
+Base: Ubuntu 20.04 focal  
+Máquina: Laptop Dell Inspiron 5458  
+Linker: GNU ld (GNU Binutils for Ubuntu) 2.34  
+Hub: Linux Foundation 3.0 root hub 
+Bash: GNU bash, versão 5.0.17(1)-release (x86_64-pc-linux-gnu) 
+
+ 

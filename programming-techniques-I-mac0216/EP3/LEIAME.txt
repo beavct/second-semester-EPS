@@ -1,0 +1,67 @@
+AUTOR:  
+
+Nome: Beatriz Viana Costa 
+NUSP: 13673214 
+Email: beatrizvianacosta@usp.br 
+
+
+DESCRIÇÃO: 
+
+O programa utiliza uma semente fixa para criar um vetor de testes de tamanho 10 com números do tipo long long de maneira pseudoaleatória.  
+Posteriormente, cada um dos 10 números é utilizado em todas as 6 funções, ehPar, ehPrimo, ehQuadradoPerfeito, ehCuboPerfeito, ehFibonacci e ehFatorial, onde tais características serão verificadas. Ou seja, ao todo são realizados 10 testes.  
+Os testes são enumerados de 1 a 10, e em cada um deles é indicado o respectivo número ao qual o teste se refere, e logo abaixo é mostrado o resultado dos testes, caso o teste tenha obtido resultado positivo é indicado que o teste obteve resultado “Verdadeiro”, caso contrário, é indicado que obteve resultado “Falso”. 
+Além disso, é criada também uma documentação em html e demais formatos desejados pelo usuário, que devem ser indicados na Doxyfile do próprio usuário. Para acessar a documentação em html por exemplo, é necessário entrar no diretório intitulado "html" criado após a execução do script em bash, e entrar no arquivo index.html. 
+
+
+COMO EXECUTAR: 
+
+Para executar o programa é utilizado o comando ./compila.sh, sem que haja a necessidade da passagem de nenhum parâmetro.  
+Este script é responsável por compilar as bibliotecas estática e dinâmica, compilar o programa e realizar a ligação com as bibliotecas, gerar a documentação nos formatos indicados pelo usuário e já executar o programa.
+Os formatos desejados para a documentação e outros parâmetros, como idioma e “extract_all” que revela mais detalhes sobre as funções presentes na biblioteca devem ser indicadas na Doxyfile que é gerada dentro do diretório após o comando “doxygen -g”.     
+Caso ocorra algum erro na execução em alguma dessas tarefas, o script retornara 1 e será encerrado. 
+
+
+TESTES: 
+
+Configuration file 'Doxyfile' created. 
+Now edit the configuration file and enter 
+[...] Execução do doxygen [...] 
+symbol lookup cache used 7/65536 hits=7 misses=7 
+finished... 
+
+Teste 1: 
+Número de entrada: 1592810915293772265  
+| É par:    Falso   | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   |  
+
+Teste 2: 
+Número de entrada: 465820762167387250  
+| É par: Verdadeiro | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   |  
+
+Teste 3: 
+Número de entrada: 2038504758957698625  
+| É par:    Falso   | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   |  
+
+Teste 4: 
+Número de entrada: 184826193198676624  
+| É par: Verdadeiro | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   |  
+
+Teste 5: 
+Número de entrada: 282409428348288000  
+| É par: Verdadeiro | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   |  
+
+Teste 6: 
+Número de entrada: 1031044618062770454  
+| É par: Verdadeiro | É primo:    Falso   | É quadrado perfeito:    Falso   | É cubo perfeito:    Falso   | É fibonacci:    Falso   | É fatorial:    Falso   | 
+
+
+DEPENDÊNCIAS: 
+
+CPU: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz, 1833 MHz ,  
+Kernel: 5.4.0-91-generic x86_64 bits: 64  
+Distro: Linux Mint 20.3 Una  
+Base: Ubuntu 20.04 focal  
+Máquina: Laptop Dell Inspiron 5458  
+Linker: GNU ld (GNU Binutils for Ubuntu) 2.34  
+Hub: Linux Foundation 3.0 root hub 
+Bash: GNU bash, versão 5.0.17(1)-release (x86_64-pc-linux-gnu) 
+Doxygen versão 1.9.5 

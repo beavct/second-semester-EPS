@@ -1,0 +1,112 @@
+\documentclass[a4paper, 11pt]{article}
+\usepackage[brazil]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts,amsmath,amssymb}
+\usepackage{enumerate}
+\usepackage[standard,thmmarks,thref]{ntheorem}
+\usepackage[colorlinks=true,citecolor=blue]{hyperref}
+
+\usepackage{xstring}
+
+%\usepackage{mathtools}
+%\usepackage{graphicx}
+
+\title{MAC0239: Exercício-Programa 2 \\ {\small Lógica de Primeira Ordem}}
+\author{Marcelo Finger}
+\date{\the\year}
+
+
+%% Redefinições (mfinger)
+\renewcommand{\phi}{\varphi}
+\renewcommand{\emptyset}{\varnothing}
+
+%% Definições
+\newcommand{\tuple}[1]{\langle{#1}\rangle}
+\newtheorem{exemplo}{Exemplo}[section]
+\newtheorem{lema}[exemplo]{Lema}
+\newtheorem{teorema}[exemplo]{Teorema}
+\newtheorem{questao}{Questão}
+
+\newenvironment{quest}[1][@]{\IfStrEq{#1}{@}{\begin{questao}}{\begin{questao}[#1]}\rm}{\end{questao}}
+
+
+\begin{document}
+    \maketitle
+
+\section*{Aviso Importante}
+
+\begin{quote}\bf\Large
+  Este  exercício deve  ser  criado e  processado por  \LaTeX\  e entregue  no   formato PDF via e-disciplinas.
+\end{quote}
+
+Não precisa entregar ``os fontes'', ou seja, o arquivo \texttt{.tex} ou \texttt{.bib}.
+
+Para facilitar  a vida de  você, estou  fornecendo os fontes  deste enunciado,
+assim vocês já  tem um arquivo \texttt{.tex} para começar  a haquear (do inglês, \emph{to
+  hack}).
+
+É explícito e declarado queeste exercício tem como objetivo secundário ensinar vocês a usar um processador de texto como o \LaTeX.   Este tipo de programa tem o aspecto de uma linguagem de programação e, como tal, você deve consultar a sua documentação.  O \LaTeX\ possui implementações para linux, windows, mac e interface web via Overleaf.  Use qual plataforma quiser, com os pacotes (\emph{packages}) que achar conveniente.  Mais uma vez: \textbf{Só entregue o PDF}.
+
+\section{Introdução}
+
+O objetivo deste EP é desenvolver uma  série de fórmulas de lógica de primeira ordem a partir  das quais um resultado de (falta  de) expressividade da lógica de primeira ordem.  Ou seja, este EP será um ``estudo dirigido'' para provar o seguinte resultado sobre a Lógica de Primeira Ordem (LPO).
+
+\begin{teorema}[Resultado Principal do EP2] \label{teo:princ}
+  Não existe  na Lógica de Primeira  Ordem uma fórmula que  seja verdadeira em   todos os modelos com domínio finito e par, e apenas nestes. \qed  
+\end{teorema}
+
+A teoria por trás destes resultados podem ter como base, dentre outras tantas possíveis, o livro de Smullyan~\cite{smullyan1995}, nos capítulos 3 e 5, que tratam dos resultados de compacidade; também há uma versão em português; ver~\cite{Smu2009}.
+
+\section{Questões}
+
+Apresentar num  documento escrito e processado  em \LaTeX, a resposta  para as seguintes questões.  Você receberá nota por suas respostas a estas questões.  O seu arquivo de entrega deve conter claramente as questões solicitadas e suas respostas.
+
+
+\begin{quest}[Aquecimento] Apresentar  uma fórmula da LPO  que, quando verdadeira em algum modelo $\mathcal{M}=\tuple{\mathcal{A}, \cdot^\mathcal{M}}$, força  o  domínio $\mathcal{A}$ a ser  infinito; esta fórmula nãão  é verdadeira em  modelos com domínio finito.
+
+  Dica: use  uma assinatura  com apenas uma  constante, um  símbolo funcional
+  unário e apenas o predicado da igualdade e, possivelemente, uma ordem parcial estrita $>$.
+
+  Nota:  eu  chamei  isso de  aquecimento  pois  não  tem  nada a  ver  com  o
+  Teorema~\ref{teo:princ}.  Ou tem?
+\end{quest}
+
+\begin{quest}
+  Apresentar duas fórmula fórmula que satisfaçam as seguintes restrições:
+  \begin{enumerate}[(a)]
+  \item Uma fórmula que seja verdadeira se e somente se (\emph{sse}) o modelo tiver pelo menos dois elementos.
+    
+  \item Uma fórmula que seja verdadeira sse o modelo tiver pelo menos 4 elementos.
+  \end{enumerate}
+\end{quest}
+
+\begin{quest}\label{q:par}
+  Apresentar uma fórmula que seja verdadeira sse, dado $n \in \mathbb{N}^+$, o
+  modelo pelo menos $2n$ elementos.
+
+  Dica: usar os conectivos generaizados:
+  \[\bigwedge_{i=1}^{n} \phi_i = \phi_1 \land \ldots \land \phi_n \qquad
+    \bigvee_{i=1}^{n} \phi_i = \phi_1 \lor \ldots \lor \phi_n\]
+\end{quest}
+
+
+\begin{quest}\label{q:lema}
+  Mostrar que, um conjunto de fórmulas que garante que o modelo possui pelo menos $2i$ elementos, para $i \in [1,n]$ sempre tem um modelo com tamanho par.  
+\end{quest}
+
+
+\begin{quest}[Finalmente] Provar o Teorema~\ref{teo:princ}.
+
+  Dica: Usar um argumento de compacidade, como o feito em sala de aula, e usar
+  as fórmulas apresentadas na Questão~\ref{q:lema}.  
+\end{quest}
+
+
+\bibliographystyle{alpha}
+\bibliography{mac239}
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

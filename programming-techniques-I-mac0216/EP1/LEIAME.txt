@@ -1,0 +1,162 @@
+AUTOR: 
+Nome: Beatriz Viana Costa 
+NUSP: 13673214 
+E-mail: beatrizvianacosta@usp.br 
+
+ 
+
+DESCRIÇÃO: 
+O programa recebe como entrada dois números, um será o modo, e outro será o número de entrada.  
+Após lê-los o programa identifica se o usuário quer como saída o número primo seguinte ao número de entrada (modo = 0) ou se quer saber se o número de entrada informado é múltiplo de dois primos, e se sim, quais (modo = 1). 
+Caso o modo seja o primeiro (modo = 0), o número entrara em uma função onde será incrementado e depois redirecionado para outra função onde será verificado se o valor informado é primo, em caso negativo, ele volta para a função anterior, e mais uma vez é verificado se este valor é primo. Este ciclo se repete até que cheguemos em um número primo. E depois de encontrado, ele é impresso na tela e o programa é encerrado.  
+Já no caso em que o modo de execução é o segundo (modo = 1), entramos em uma função onde uma variável, que chamaremos de VAR1, é inicializada com o número de entrada dividido por dois, e outra variável, VAR2, é inicializada com o número de entrada dividido por VAR2. Depois disso realizamos testes para verificar se VAR1 e VAR2 são primos, e se multiplicados realmente resultarão no número de entrada (pois no caso do código em C, quando o valor de entrada é impar e este mesmo é dividido por dois, seu valor é arredondado para baixo).  
+Caso os dois multiplicadores existam, VAR1 e VAR2 são impressos na tela, caso contrário nada é impresso e o programa é encerrado.  
+ 
+COMO COMPILAR: 
+O programa em C foi compilado usando as seguintes linhas de comando: 
+gcc –ansi –Wall –pedantic –o TESTEC ep1.c 
+Sendo o ep1.c nosso código em linguagem C, e TESTEC o nosso executável. 
+
+Já o programa em assembly foi montado e ligado com as seguintes linhas de comando: 
+nasm -f elf64 -g -F dwarf -o ep1.o ep1.s 
+d -o TESTEA ep1.o 
+Sendo ep1.s nosso código em assembly, ep1.o o arquivo intermediário e TESTEA nosso executável. 
+
+  
+
+COMO EXECUTAR: 
+Após compilar o programa em C, usamos a seguinte linha de comando para executa-lo: 
+./TESTEC 
+Como entrada devemos fornecer o modo (<modo>) e número de entrada (<num_entrada>), da seguinte forma: 
+<modo>  <num_entrada>  
+Caso nosso modo seja igual 0, o resultado impresso será o primeiro número primo após o número de entrada (<prox_primo>): 
+<prox_primo> 
+Caso o modo seja igual a 1, temos duas possibilidades, caso o número informado como número de entrada não possa ser escrito como múltiplo de dois primos (<VAR1> <VAR2>), nada é impresso, e no caso contrários, estes dois múltiplos são impressos: 
+<VAR1>  <VAR2> 
+
+Já no programa em assembly a linha de comando utilizada para executa-lo é: 
+./TESTEA 
+Após isso informamos o modo e o número de entrada da mesma menina que em C. E caso o modo seja igual a 0, a impressão do resultado também é feita da mesma forma que em C, contudo, por um erro na impressão do resultado, após o resultado do próximo primo, é impresso um “resíduo”, que deve ser desconsiderado como resultado: 
+<prox_primo> 
+<X> 
+Caso o modo seja igual a um, temos duas possíveis respostas: podemos receber dois números, que serão dois múltiplos primos do número de entrada (<VAR1> e <VAR2>). Por um erro no momento da impressão dois múltiplos, após a impressão de cada um dos números há um “resíduo” (<X>), que deve ser desconsiderado como resultado: 
+<VAR1>   
+<X> 
+<VAR2> 
+<X> 
+Caso o número de entrada não possa ser escrito como a multiplicação de dois números primos, nada é impresso e o programa é encerrado. 
+
+TESTES: 
+Teste para o programa em C: 
+
+Para modo de execução 0: 
+
+Entrada 1:   
+0 10000000 
+
+Saída 1:   
+10000019 
+
+Entrada 2: 
+0 121323454 
+
+Saída 2:  
+121323473 
+
+Entrada 3:  
+0 9876523 
+
+Saída 3:  
+9876527 
+
+Para modo de execução 1: 
+
+Entrada 4:  
+1 7199 
+
+Saída 4:  
+313 23 
+
+Entrada 5: 
+1 1488391 
+
+Saída 5: 
+1223 1217 
+
+Entrada 6: 
+1 12342 
+
+Saída 6: 
+ 
+
+Teste para o programa em assembly: 
+
+Para o modo 0: 
+
+Entrada 1:  
+0 10000000 
+
+Saída 1:  
+10000019 
+
+        ���������000000  
+
+Entrada 2: 
+0 121323454 
+
+Saída 2: 
+121323473 
+
+        �?;�?;�?;1323454 
+
+Entrada 3: 
+0 9876523 
+
+Saída 3:  
+9876527 
+
+        +��+��/��76523 
+
+Para o modo 1: 
+
+Entrada 4: 
+1 7199 
+
+Saída 4:  
+313  
+
+        999 
+
+23 
+
+        999  
+
+Entrada 5: 
+1 1488391 
+
+Saída 5:  
+1223  
+
+        ����88391  
+
+1217 
+
+        ����88391 
+
+Entrada 6: 
+1 12342 
+
+Saída 6: 
+
+
+DEPENDÊNCIAS: 
+CPU: Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz, 1833 MHz 
+Kernel: 5.4.0-91-generic x86_64 bits: 64  
+Compilador: gcc v: 9.3.0 Desktop: Cinnamon 5.2.7  
+Distro: Linux Mint 20.3 Una  
+Base: Ubuntu 20.04 focal  
+Máquina:  Laptop Dell Inspiron 5458 
+Linker: GNU ld (GNU Binutils for Ubuntu) 2.34 
+Hub: Linux Foundation 3.0 root hub 
+
+ 

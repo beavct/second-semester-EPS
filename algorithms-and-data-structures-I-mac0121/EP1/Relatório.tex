@@ -1,0 +1,43 @@
+\documentclass[11pt,reqno,a4paper]{amsart}
+
+\usepackage{setspace}
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+
+\usepackage{fullpage}
+\usepackage{setspace}
+
+\begin{document}
+\parindent=0pt
+
+\title{\textsl{Relatório EP1 - Algoritmos e Estruturas de Dados I (MAC0121)}}
+\author{}
+
+\maketitle
+\thispagestyle{empty} 
+\pagestyle{plain}
+\onehalfspace
+
+\textbf{Nome:Beatriz Viana Costa}\hfill
+\textbf{Número USP:13673214}\hspace{3cm}\null
+
+\medskip{Para a realização do exercício-programa foram implementadas 5 funções, com seus devidos cabeçalhos do arquivo \textit{pilha.h} e suas implementações no arquivo \textit{EP1funcoes.c}, ademais foi colocado ainda no arquivo de biblioteca um \textit{typedef} info, que será usado posteriormente na inicialização de um \textit{array}.\\ 
+As funções criadas foram: \\
+ 1 - \textit{Int *Cria()}: Encarregada de alocar a memória utilizada no \textit{array} de forma dinâmica.\\ 
+ 2- \textit{Int conjeccollatz}: Calcula de fato a conjectura de Collatz.\\
+ 3 - \textit{Int Procura}: Recebe o começo do intervalo, um vetor e o número que se deseja encontrar no vetor indicado. Para isso encontramos o índice através da relação \textit{i = n - inicio}, onde i é o índice, início o começo do intervalo e n o número procurado. 
+ 4 - \textit{Int calcula}: Recebe o número no qual a conjectura deve ser calculada, um intervalo fechado e um vetor. \\ Enquanto o número não convergiu em 1, permanece dentro do laço para que a conjectura seja calculada. Tendo em vista que os números são calculados na ordem crescente, toda vez que está função encontra o número de passos necessários, ela o insere no vetor dentro da ordem. \\ Assim, posteriormente, quando a função for calcular um número maior, e ele for dividido por dois, será verificado se este valor é menor que o número inicial, em caso afirmativo, é chamada a função \textit{procura}, que recebe este número atual, procura no índice correto do vetor e retorna a quantidade de passos. \\ Assim a quantidade de passos encontrada é somada a quantidade de passos encontrada no vetor. Antes desse número ser retornado, o vetor é preenchido com a quantidade de passos.
+}
+
+\vfill
+
+\endgroup
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (auto-fill-mode t)
+%%% eval: (LaTeX-math-mode t)
+%%% eval: (flyspell-mode t)
+%%% TeX-master: t
+%%% End:

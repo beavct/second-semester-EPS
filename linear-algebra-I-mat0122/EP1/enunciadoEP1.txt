@@ -1,0 +1,158 @@
+Estude inicialmente a Seção 7.8 Lab: Factoring integers de PNK.  O enunciado que segue supõe que você já acompanhou o material naquele laboratório.
+
+Objetivo.  Considere o Task 7.8.11 de PNK. Neste exercício, você deve escrever um programa que executa os passos descritos no Task 7.8.11 para encontrar um fator não-trivial do inteiro dado como entrada. Seu programa deve chamar-se factor.py.
+
+Exemplos de execução.  Em sua forma mais simples, seu programa factor.py será testado como nos exemplos abaixo:
+
+$ python factor.py 15
+factor = 3
+$ python factor.py 2022
+factor = 6
+$ python factor.py 2461799993978700679
+factor = 1230926561
+$ python factor.py 37
+Failed
+$
+
+Seu programa deve também permitir ao usuário fornecer um valor U de forma que primelist (do Task 7.8.11) seja o conjunto de primos até U:
+
+$ python factor.py 2022 100
+factor = 6
+$
+
+Na execução acima, U=100. Quando o usuário não fornece um segundo argumento de linha de comando (como nos exemplos iniciais acima), seu programa deve usar o valor padrão U=10000. Seu programa deve também ter um modo "verborrágico": nesse modo, seu programa deve enviar para a saída padrão os pares a e b que ele testou no processo. Para executar seu programa neste modo, o usuário deve fornecer o valor de N, U e mais um símbolo qualquer na linha de comando:
+
+$ python factor.py 2022 100 +
+0: a = 9996305679360 / b = 129436552212
+1: a = 53253585 / b = 6189513
+2: a = 69976420 / b = 10791022
+2: a = 69976420 / b = 10791022
+factor = 6
+$
+
+Detalhes de implementação.  Seu programa pode usar vários módulos já fornecidos em PNK. Seu programa deve começar da seguinte forma:
+
+import sys
+import GF2
+from GF2 import one
+from vec import Vec
+from factoring_support import intsqrt, dumb_factor, primes, prod, gcd
+
+Entretanto, você deve implementar uma pequena variante do procedimento transformation_rows() de echelon.py. A saber, sua versão deste procedimento deve devolver um par (r,z), onde r é o que o transformation_rows() original devolve, e z é o número de linhas nulas na matriz escalonada. (Esta informação é útil para se executar o último passo descrito em Task 7.8.11.)
+
+Exemplo. Executando-se sua variante de transformation_rows() na matriz do Exemplo 7.5.1 de PNK, o valor de z resultante deve ser 2.
+
+>>> from vecutil import list2vec
+>>> from GF2 import one
+>>> v1 = list2vec([0, 0, 0, one, 0])
+>>> v2 = list2vec([0, 0, 0, one, one])
+>>> v3 = list2vec([one, 0, 0, one, 0])
+>>> v4 = list2vec([one, 0, 0, 0, one])
+>>> v5 = list2vec([one, 0, 0, 0, 0])
+>>> r, z = transformation_rows([v1, v2, v3, v4, v5])
+>>> z
+2
+>>>
+
+Observação. Seu programa não deve fazer referência a echelon.py. Copie transformation_rows() de echelon.py em seu programa e adicione um pouco de código (basta adicionar pouquíssimo código).
+
+Geração de exemplos.  Você pode usar o programa challenge.py dado abaixo para gerar instâncias para testar seu programa factor.py. O programa challenge.py usa SymPy, uma biblioteca Python para matemática simbólica.
+
+SymPy
+https://sympy.org
+
+Você terá de instalar SymPy em seu computador para usar challange.py. Na forma básica, o usuário fornece dois inteiros a e b para challenge.py, e o programa gera dois primos aleatórios no intervalo [a,b) e também fornece seu produto.
+
+$ python challenge.py 10000 20000
+p = 13033 / q = 11467 / p*q = 149449411
+$ python factor.py 149449411
+factor = 13033
+$ python challenge.py 1000000 2000000
+p = 1587673 / q = 1875683 / p*q = 2977971255659
+$ python factor.py 2977971255659
+factor = 1875683
+$
+
+O programa challenge.py pode também receber um terceiro parâmetro k, para gerar k primos aleatórios no intervalo especificado.
+
+$ python challenge.py 10000 15000 3
+13397
+11863
+11353
+1804316520683
+$ python factor.py 1804316520683
+factor = 11863
+$
+
+Desempenho.  Apenas como ilustração, seguem algumas execuções de factor.py.
+
+$ time python factor.py 2461799993978700679
+factor = 1230926561
+
+real 0m7.284s
+user 0m7.244s
+sys 0m0.024s
+$ python factor.py 2461799993978700679 10000 +
+0: a = 20078199951783913609117535513408658804695847187050318344159354735335547480304220819326064738509521473746426666054059658784571707908483642258765726382236015688266536573608094521185456842684027265278537371064110286665697428960028942444429211956630019141408395943225281978961409122113135803218532383325121276279772970079923184577584937153575755980458961595926931943110300238785745540925921402047023783123986405809139601727318473114668372807126309198278358411960041233339187206882442377374960950172749026945868465339190584980618234462952409088679572160151210438438996541517759048659042220472126381608559204759318634168320000000000 / b =
+2713762642571129178593698684518287258353762029756704353577771543443124565088331438732573296741114046729264968514721086075324517608108206726217989552490822770002675460832416589564558245078555462187363528456590724641941299278793304078194397314188679442202324077726571911463158469702526003123941870918431840662263519503065178104563236710358170869253097178986140857405368012274671329207874614589298617500307531706269759720037335937500000000000000000
+1: a = 1561013775490865479164576019873843952932792003446006038506066172004642900831604625028334082893638292298093457761994464845846601977721373722270810598635724466304559034512227486267040403044846375714165331621326331347367111467398099747964943167035592520654911915220416946552100867299651303888024448966844849377307301186817654175474037384408995546294096729007415341618329364076465463246320799723200496280585049718257662430590332089753307239072730891475730041268390605700466357738721315099396516948148851732023685253548039725450815994418298031974283672910698906144938050336209615471215403218406126104596209835536909813839758611286288744758890204657034889573185695147292561556614665095152406290607441275624755975994105576853865256963206740934007337628354392396708408978536479661319667314479061589591849877456538161418333175878872718324531200000000000000000000000 / b = 2164237433506392103020677286191026474505882811002838428346557468508595092945613858515988144351902891909860507757020811906018016322198497881313131747112869246661191146525785171470054643454374144185809692514453815732221567489127178315513856827475778019485910859828788146655939573355230315317226453754962031139641774746857801884105935674693012466457790348390968326610412841315579130249301711783428690119506564264438366439444921979671335337796550837796775754551557682277459221402133729559316616620237082163923665358126674207214062537886740294861176072596023175812522946428153896484375000000000000000000000000
+factor = 1230926561
+$ time python factor.py 20672783502493917028427
+factor = 1230926561
+
+real 2m14.175s
+user 2m13.634s
+sys 0m0.423s
+$ python challenge.py 100 200
+p = 113 / q = 131 / p*q = 14803
+$ python factor.py 113 200 +
+0: a = 2087910 / b = 1201312
+1: a = 20370 / b = 9296
+2: a = 715904 / b = 383812
+3: a = 1281150 / b = 511168
+4: a = 8260980 / b = 2404864
+5: a = 12623520 / b = 4068064
+6: a = 1302840 / b = 777616
+7: a = 1079 / b = 616
+8: a = 81628560 / b = 15887872
+9: a = 5834400 / b = 1697696
+10: a = 18105 / b = 9856
+11: a = 12558 / b = 4648
+12: a = 337280 / b = 164164
+13: a = 269620 / b = 101024
+14: a = 57 / b = 56
+15: a = 194480 / b = 64064
+16: a = 209950 / b = 76384
+17: a = 784 / b = 572
+18: a = 12255 / b = 6944
+19: a = 7995 / b = 3136
+20: a = 129285 / b = 39424
+21: a = 646 / b = 484
+22: a = 540 / b = 364
+23: a = 15708 / b = 10736
+24: a = 10230 / b = 5936
+25: a = 102544 / b = 32032
+26: a = 5967 / b = 2464
+27: a = 4875 / b = 1792
+28: a = 1219920 / b = 256256
+29: a = 5460 / b = 2296
+Failed
+$ python challenge.py 10000000000 20000000000
+p = 11035675657 / q = 10316297113 / p*q = 113847308920313478241
+$ time python factor.py 113847308920313478241
+factor = 10316297113
+
+real 0m7.469s
+user 0m7.415s
+sys 0m0.037s
+$ python challenge.py 10000000000 20000000000
+p = 11424138787 / q = 16821545621 / p*q = 192171671786156101727
+$ time python factor.py 192171671786156101727
+factor = 11424138787
+
+real 0m34.443s
+user 0m34.320s
+sys 0m0.093s
+$
+
+Entrega.  Você deve entregar apenas o seu programa factor.py.
